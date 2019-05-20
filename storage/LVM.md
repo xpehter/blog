@@ -122,7 +122,7 @@ LVM - это прослойка между дисками и ОС. Котора�
    ```
    Увеличиваем физический том
    ```
-   pvresize /dev/sda3
+   # pvresize /dev/sda3
    ```
    
    Проверяем   
@@ -154,11 +154,11 @@ LVM - это прослойка между дисками и ОС. Котора�
    ```
    Увеличение производится командой
    ```
-   lvextend -l +100%FREE /dev/<volumeGroupName>/<logicalVolumeName>
+   # lvextend -l +100%FREE /dev/<volumeGroupName>/<logicalVolumeName>
    ```
    т.е. в нашем случае
    ```
-   lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+   # lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
    ```
    Проверяем
    ```
@@ -169,11 +169,11 @@ LVM - это прослойка между дисками и ОС. Котора�
    ```
 - Последним шагом станет увеличение размера файловой системы. Для ext4 производится командой
    ```
-   resize2fs /dev/<volumeGroupName>/<logicalVolumeName>
+   # resize2fs /dev/<volumeGroupName>/<logicalVolumeName>
    ```
    т.е. в нашем случае
    ```
-   resize2fs /dev/ubuntu-vg/ubuntu-lv
+   # resize2fs /dev/ubuntu-vg/ubuntu-lv
    ```
    Проверяем
    ```
