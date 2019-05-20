@@ -134,23 +134,23 @@ LVM - это прослойка между дисками и ОС. Котора�
    ```
 - Для увеличения логического тома понадобится путь к нему (LV Path), состоящий из имени группы томов (VG Name) и имени самого логического тома (LV Name), их можно узнать командой `lvdisplay`
    ```
-   # lvdisplay
-     --- Logical volume ---
-     LV Path                /dev/ubuntu-vg/ubuntu-lv
-     LV Name                ubuntu-lv
-     VG Name                ubuntu-vg
-     LV UUID                Cj8k2a-fPGO-eHW0-HcHu-xLkY-4uR3-qfqdgi
-     LV Write Access        read/write
-     LV Creation host, time ubuntu-server, 2019-05-15 15:24:45 +0000
-     LV Status              available
-     # open                 1
-     LV Size                <5.50 GiB
-     Current LE             1407
-     Segments               1
-     Allocation             inherit
-     Read ahead sectors     auto
-     - currently set to     256
-     Block device           253:0
+   # lvdisplay 
+   --- Logical volume ---
+   LV Path                /dev/ubuntu-vg/ubuntu-lv
+   LV Name                ubuntu-lv
+   VG Name                ubuntu-vg
+   LV UUID                Cj8k2a-fPGO-eHW0-HcHu-xLkY-4uR3-qfqdgi
+   LV Write Access        read/write
+   LV Creation host, time ubuntu-server, 2019-05-15 15:24:45 +0000
+   LV Status              available
+   # open                 1
+   LV Size                <6.50 GiB
+   Current LE             1663
+   Segments               1
+   Allocation             inherit
+   Read ahead sectors     auto
+   - currently set to     256
+   Block device           253:0
    ```
    Увеличение производится командой
    ```
@@ -160,6 +160,13 @@ LVM - это прослойка между дисками и ОС. Котора�
    ```
    lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
    ```
+   Проверяем
+   ```
+   # lvdisplay 
+   ...
+   LV Size                <7.50 GiB
+   ...
+   ```
 - Последним шагом станет увеличение размера файловой системы. Для ext4 производится командой
    ```
    resize2fs /dev/<volumeGroupName>/<logicalVolumeName>
@@ -167,4 +174,11 @@ LVM - это прослойка между дисками и ОС. Котора�
    т.е. в нашем случае
    ```
    resize2fs /dev/ubuntu-vg/ubuntu-lv
+   ```
+   Проверяем
+   ```
+   # df -h
+   ...
+   /dev/mapper/ubuntu--vg-ubuntu--lv  7.4G  3.6G  3.4G  52% /
+   ...
    ```
